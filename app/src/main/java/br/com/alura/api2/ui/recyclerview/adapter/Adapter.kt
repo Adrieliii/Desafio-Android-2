@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.api2.R
 import br.com.alura.api2.ui.data.model.Filme
+import com.squareup.picasso.Picasso
 import java.util.ArrayList
 
 class Adapter(
@@ -18,9 +19,13 @@ class Adapter(
     }
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
+        private val imagePosterFilme = itemView.findViewById(R.id.item_filme_imagem)
         fun vincula(filme: Filme) {
             val nome = itemView.findViewById<TextView>(R.id.item_filme_titulo)
             nome.text = filme.titulo
+            Picasso.get()
+                .load("https://image.tmdb.org/t/p/w342/" + filme.caminhoPoster)
+                .into(imagePosterFilme)
         }
     }
 
