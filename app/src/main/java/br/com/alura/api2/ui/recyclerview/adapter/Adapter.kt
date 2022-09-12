@@ -3,6 +3,7 @@ package br.com.alura.api2.ui.recyclerview.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.api2.R
@@ -19,7 +20,7 @@ class Adapter(
     }
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-        private val imagePosterFilme = itemView.findViewById(R.id.item_filme_imagem)
+        private val imagePosterFilme = itemView.findViewById<ImageView>(R.id.item_filme_imagem)
         fun vincula(filme: Filme) {
             val nome = itemView.findViewById<TextView>(R.id.item_filme_titulo)
             nome.text = filme.titulo

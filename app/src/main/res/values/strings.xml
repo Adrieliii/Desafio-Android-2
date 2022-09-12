@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">API(2)</string>
+    <string name="app_name">Filmes</string>
+    <string name="popular">Popular</string>
+    <string name="filmes_populares">Filmes Populares</string>
+    <string name="filmes_erro">Por favor cheque sua conexão</string>
+    <string name="filmes_avaliados">Top Avaliados</string>
+    <string name="top_filmes_avaliados">Top Avaliados Sempre</string>
+    <string name="filmes_breve">Em breve</string>
+    <string name="filmes_lancamentos">Novidades</string>
 </resources>
