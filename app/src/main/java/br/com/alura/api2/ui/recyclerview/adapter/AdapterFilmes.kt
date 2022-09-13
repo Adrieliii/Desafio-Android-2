@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 
 class AdapterFilmes
-    (private var filmes: List<Filme>) : RecyclerView.Adapter<AdapterFilmes.FilmeViewHolder>() {
+    (private var filmes: MutableList<Filme>) : RecyclerView.Adapter<AdapterFilmes.FilmeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmeViewHolder {
         val view = LayoutInflater
@@ -26,9 +26,12 @@ class AdapterFilmes
         holder.bind(filmes[position])
     }
 
-    fun atualizaFilmes(movies: List<Filme>) {
-        this.filmes = movies
-        notifyDataSetChanged()
+    fun chamaFilmes(filmes: List<Filme>) {  // paginação
+        this.filmes.addAll(filmes)
+        notifyItemRangeInserted(
+            this.filmes.size,
+            filmes.size - 1
+        )
     }
 
     inner class FilmeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

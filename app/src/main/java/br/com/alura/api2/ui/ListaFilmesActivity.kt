@@ -14,28 +14,54 @@ import br.com.alura.api2.ui.recyclerview.adapter.AdapterFilmes
 class ListaFilmesActivity : AppCompatActivity() {
     private lateinit var filmesPopulares: RecyclerView
     private lateinit var filmesPopularesAdapter: AdapterFilmes
+    private lateinit var filmesPopularesLayout: LinearLayoutManager
+
+    private var filmesPopularesPage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_filmes)
 
         filmesPopulares = findViewById(R.id.filmes_populares)
-        filmesPopulares.layoutManager = LinearLayoutManager(
+        filmesPopularesLayout = LinearLayoutManager(
             this,
             LinearLayoutManager.HORIZONTAL,
             false
         )
-        filmesPopularesAdapter = AdapterFilmes(listOf())
+        filmesPopulares.layoutManager = filmesPopularesLayout
+        filmesPopularesAdapter = AdapterFilmes(mutableListOf())
         filmesPopulares.adapter = filmesPopularesAdapter
 
+        getFilmesPopulares()
+    }
+
+    private fun anexaFilmesPopulares() {
+        filmesPopulares.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val totalItemCount = filmesPopularesLayout.itemCount
+                val visibleItemCount = filmesPopularesLayout.childCount
+                val firstVisibleItem = filmesPopularesLayout.findFirstVisibleItemPosition()
+
+                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
+                    filmesPopulares.removeOnScrollListener(this)
+                    filmesPopularesPage++
+                    getFilmesPopulares()
+                }
+            }
+        })
+    }
+
+    private fun getFilmesPopulares() {
         RetroFitInicializador.getFilmesPopulares(
+            filmesPopularesPage,
             onSuccess = ::FilmesPopulares,
             onError = ::onError
         )
     }
 
     private fun FilmesPopulares(filmes: List<Filme>) {
-        filmesPopularesAdapter.atualizaFilmes(filmes)
+        filmesPopularesAdapter.chamaFilmes(filmes)
+        anexaFilmesPopulares()
     }
 
     private fun onError() {
