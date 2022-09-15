@@ -11,7 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 
 class AdapterFilmes
-    (private var filmes: MutableList<Filme>) : RecyclerView.Adapter<AdapterFilmes.FilmeViewHolder>() {
+    (private var filmes: MutableList<Filme>,
+     private val onFilmeClick: (filme: Filme) -> Unit
+) : RecyclerView.Adapter<AdapterFilmes.FilmeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmeViewHolder {
         val view = LayoutInflater
@@ -43,6 +45,8 @@ class AdapterFilmes
                 .load("https://image.tmdb.org/t/p/w342${filme.posterPath}")
                 .transform(CenterCrop())
                 .into(poster)
+
+            itemView.setOnClickListener { onFilmeClick.invoke(filme) }
         }
     }
 }
