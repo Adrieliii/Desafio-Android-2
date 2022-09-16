@@ -5,4 +5,8 @@ dessa lista, e uma tela de detalhes do filme selecionado, com informações bás
 
 # 🛠️ Abrir e rodar o projeto
 
-**Após baixar o projeto, você pode abrir com o Android Studio. Clique em "Open an existing project" e espere o Android Studio realizar algumas taks do Gradle.**
+Após baixar o projeto, você pode abrir com o Android Studio. Clique em "Open an existing project" e espere o Android Studio realizar algumas taks do Gradle.
+
+# Recursos usados
+
+URL base da API: https://api.themoviedb.org/3/.
