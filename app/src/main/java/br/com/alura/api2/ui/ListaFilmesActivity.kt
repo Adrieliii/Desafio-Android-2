@@ -5,79 +5,33 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.api2.R
 import br.com.alura.api2.ui.data.model.Filme
 import br.com.alura.api2.ui.data.network.RetroFitInicializador
+import br.com.alura.api2.ui.fragment.FilmesFragment
 import br.com.alura.api2.ui.recyclerview.adapter.AdapterFilmes
 
+private const val FILMES_FRAGMENT = "filmes_fragment"
 
 class ListaFilmesActivity : AppCompatActivity() {
-    private lateinit var filmesPopulares: RecyclerView
-    private lateinit var filmesPopularesAdapter: AdapterFilmes
-    private lateinit var filmesPopularesLayout: GridLayoutManager
-
-    private var filmesPopularesPage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_filmes)
 
-        filmesPopulares = findViewById(R.id.filmes_populares)
-        filmesPopularesLayout = GridLayoutManager(
-            this,
-           2
-        )
-        filmesPopulares.layoutManager = filmesPopularesLayout
-        filmesPopularesAdapter = AdapterFilmes(mutableListOf()) { filme -> mostraDetalhesFilmes(filme)}
-        filmesPopulares.adapter = filmesPopularesAdapter
-
-        getFilmesPopulares()
+        mostraFilmesFragment()
     }
 
-    private fun anexaFilmesPopulares() {
-        filmesPopulares.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val totalItemCount = filmesPopularesLayout.itemCount
-                val visibleItemCount = filmesPopularesLayout.childCount
-                val firstVisibleItem = filmesPopularesLayout.findFirstVisibleItemPosition()
-
-                if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
-                    filmesPopulares.removeOnScrollListener(this)
-                    filmesPopularesPage++
-                    getFilmesPopulares()
-                }
-            }
-        })
-    }
-
-    private fun getFilmesPopulares() {
-        RetroFitInicializador.getFilmesPopulares(
-            filmesPopularesPage,
-            onSuccess = ::FilmesPopulares,
-            onError = ::onError
-        )
-    }
-
-    private fun FilmesPopulares(filmes: List<Filme>) {
-        filmesPopularesAdapter.chamaFilmes(filmes)
-        anexaFilmesPopulares()
-    }
-
-    private fun onError() {
-        Toast.makeText(this, getString(R.string.filmes_erro), Toast.LENGTH_SHORT).show()
-    }
-
-    private fun mostraDetalhesFilmes(filme: Filme) {
-        val intent = Intent(this, DetalheFilmeActivity::class.java)
-        intent.putExtra(FILME_BACKDROP, filme.backdropPath)
-        intent.putExtra(FILME_POSTER, filme.posterPath)
-        intent.putExtra(FILME_TITULO, filme.title)
-        intent.putExtra(FILME_RATING, filme.rating)
-        intent.putExtra(FILME_DATA, filme.releaseDate)
-        intent.putExtra(FILME_OVERVIEW, filme.overview)
-        startActivity(intent)
+    private fun mostraFilmesFragment() {
+        val transicao = supportFragmentManager.beginTransaction()
+        val fragment = supportFragmentManager.findFragmentByTag(FILMES_FRAGMENT)
+        if (fragment == null) {
+            transicao.add(R.id.fragment_container, FilmesFragment(), FILMES_FRAGMENT)
+        } else {
+            transicao.show(fragment)
+        }
+        transicao.commit()
     }
 
 

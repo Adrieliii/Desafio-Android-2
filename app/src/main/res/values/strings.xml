@@ -7,4 +7,9 @@
     <string name="top_filmes_avaliados">Top Avaliados Sempre</string>
     <string name="filmes_breve">Em breve</string>
     <string name="filmes_lancamentos">Novidades</string>
+    <string name="on_air">On Air</string>
+    <string name="adiciona_favoritos">Adiciona aos favoritos</string>
+    <string name="remove_favoritos">Remove dos favoritos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
