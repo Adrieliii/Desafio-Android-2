@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/watchlist"
+        android:id="@+id/favoritos"
         android:enabled="true"
         android:icon="@drawable/baseline_star_white_18"
         android:title="Favoritos"
