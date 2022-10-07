@@ -80,6 +80,7 @@ class FilmesFragment : Fragment() {
 
     private fun mostraDetalhesFilmes(filme: Filme) {
         val intent = Intent(activity, DetalheFilmeActivity::class.java)
+        intent.putExtra(FILME_ID, filme.id)
         intent.putExtra(FILME_BACKDROP, filme.backdropPath)
         intent.putExtra(FILME_POSTER, filme.posterPath)
         intent.putExtra(FILME_TITULO, filme.title)
