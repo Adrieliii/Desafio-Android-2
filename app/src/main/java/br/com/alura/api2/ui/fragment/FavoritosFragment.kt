@@ -47,7 +47,6 @@ class FavoritosFragment : Fragment() {
         favoritos.adapter = favoritosAdapter
 
 
-
         return view
     }
 
@@ -77,6 +76,7 @@ class FavoritosFragment : Fragment() {
                 filme.releaseDate
             )
         }
+
 
         favoritosAdapter.notifyDataSetChanged()
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.api2.R
+import br.com.alura.api2.ui.data.model.Favoritos
 import br.com.alura.api2.ui.data.model.Filme
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop

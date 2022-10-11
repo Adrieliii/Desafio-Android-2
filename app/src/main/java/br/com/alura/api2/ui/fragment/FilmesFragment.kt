@@ -25,9 +25,10 @@ class FilmesFragment : Fragment() {
     private lateinit var filmesPopulares: RecyclerView
     private lateinit var filmesPopularesAdapter: AdapterFilmes
     private lateinit var filmesPopularesLayout: GridLayoutManager
-    private lateinit var viewModel: FilmesViewModel
+   /* private lateinit var viewModel: FilmesViewModel*/
 
     private var filmesPopularesPage = 1
+
 
    /* override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

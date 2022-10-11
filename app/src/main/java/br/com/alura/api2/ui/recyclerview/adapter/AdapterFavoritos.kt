@@ -10,11 +10,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 
 class AdapterFavoritos(
+    private val onItemClick: (item: Favoritos) -> Unit
 ) : RecyclerView.Adapter<AdapterFavoritos.FavoritosHolder>() {
 
     var items: List<Favoritos> = emptyList()
-
-    lateinit var onItemClick: (item: Favoritos) -> Unit
+    
     lateinit var onItemClickLong: (posicao: Int) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritosHolder {
