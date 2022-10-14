@@ -16,6 +16,7 @@ class AdapterFilmes
      private val onFilmeClick: (filme: Filme) -> Unit
 ) : RecyclerView.Adapter<AdapterFilmes.FilmeViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmeViewHolder {
         val view = LayoutInflater
             .from(parent.context)

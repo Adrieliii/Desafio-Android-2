@@ -2,10 +2,11 @@ package br.com.alura.api2.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import br.com.alura.api2.ui.data.model.Filme
 import br.com.alura.api2.ui.data.network.RetroFitInicializador
 
-class FilmesViewModel {
+class FilmesViewModel : ViewModel() {
     private val _filmesPopulares = MutableLiveData<List<Filme>>()
     private val _error = MutableLiveData<Boolean>()
 

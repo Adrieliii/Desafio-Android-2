@@ -13,4 +13,11 @@ interface FilmesService {
         @Query("page") page: Int
     ): Call<FilmesResponse>
 
+    @GET("search/movie")
+    fun getFilmesPesquisados(
+        @Query("api_key") apiKey: String = "9106a44c761c36bbb02f24c16958a56a",
+        @Query("query") nome: String
+    ): Call<FilmesResponse>
+
+
 }

@@ -51,4 +51,32 @@ object RetroFitInicializador {
             })
 
     }
+
+    fun getFilmesPesquisados(
+        nome: String, onSuccess: (movies: List<Filme>) -> Unit,
+        onError: () -> Unit
+    ) {
+        api.getFilmesPesquisados(nome = nome)
+            .enqueue(object : Callback<FilmesResponse> {
+                override fun onResponse(
+                    call: Call<FilmesResponse>,
+                    response: Response<FilmesResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+
+                        if (responseBody != null) {
+                            onSuccess.invoke(responseBody.movies)
+                        } else {
+                            onError.invoke()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<FilmesResponse>, t: Throwable) {
+                    onError.invoke()
+                }
+            })
+
+    }
 }

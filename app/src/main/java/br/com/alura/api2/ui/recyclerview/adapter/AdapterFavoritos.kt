@@ -14,7 +14,7 @@ class AdapterFavoritos(
 ) : RecyclerView.Adapter<AdapterFavoritos.FavoritosHolder>() {
 
     var items: List<Favoritos> = emptyList()
-    
+
     lateinit var onItemClickLong: (posicao: Int) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritosHolder {
@@ -55,4 +55,3 @@ class AdapterFavoritos(
     }
 
 }
-
