@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -16,6 +17,8 @@ import br.com.alura.api2.ui.data.model.Filme
 import br.com.alura.api2.ui.data.network.RetroFitInicializador
 import br.com.alura.api2.ui.recyclerview.adapter.AdapterFilmes
 import br.com.alura.api2.ui.recyclerview.adapter.AdapterPesquisa
+import br.com.alura.api2.ui.viewmodel.FilmesViewModel
+import br.com.alura.api2.ui.viewmodel.PesquisaViewModel
 import java.util.*
 
 class PesquisaFragment : Fragment() {
@@ -24,19 +27,16 @@ class PesquisaFragment : Fragment() {
     private lateinit var filmesAdapter: AdapterPesquisa
     private lateinit var filmesLayout: GridLayoutManager
     private  lateinit var filmess: MutableList<Filme>
+    private lateinit var viewModel: PesquisaViewModel
 
     private var filmesPage = 1
 
 
-    private val db: AppDatabase by lazy {
-        Room.databaseBuilder(
-            requireActivity().applicationContext,
-            AppDatabase::class.java,
-            "meusfilmes.db"
-        ).allowMainThreadQueries().build()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(PesquisaViewModel::class.java)
+
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +50,7 @@ class PesquisaFragment : Fragment() {
         filmess = arrayListOf<Filme>()
         filmesAdapter =
             AdapterPesquisa{ filme -> mostraDetalhesFilmes(filme) }
-        filmesPesquisados.adapter = filmesAdapter // passar a lista2
+        filmesPesquisados.adapter = filmesAdapter
 
         return view
     }
@@ -71,6 +71,16 @@ class PesquisaFragment : Fragment() {
 
         })
     }
+
+ /*   override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.filmesPesquisados.observe(viewLifecycleOwner, Observer { filmes ->
+            filmesAdapter.chamaFilmes(filmes)
+            anexaFilmesPopulares()
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, Observer { onError() })
+    }*/
 
     fun getFilmesPesquisados(nome : String) {
         RetroFitInicializador.getFilmesPesquisados(
@@ -105,7 +115,6 @@ class PesquisaFragment : Fragment() {
     }
 
 
-
     private fun mostraDetalhesFilmes(filme: Filme) {
         val intent = Intent(activity, DetalheFilmeActivity::class.java)
         intent.putExtra(FILME_ID, filme.id)
@@ -120,6 +129,9 @@ class PesquisaFragment : Fragment() {
 
 
 }
+
+
+
 
 
 

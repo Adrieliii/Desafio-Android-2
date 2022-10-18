@@ -30,6 +30,11 @@ class AdapterFavoritos(
         holder.bind(items[position])
     }
 
+   /* fun atualizaItems(items: List<Favoritos>) {
+        this.items = items
+        notifyDataSetChanged()
+    }*/
+
 
     inner class FavoritosHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

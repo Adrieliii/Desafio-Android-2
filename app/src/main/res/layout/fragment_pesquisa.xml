@@ -13,9 +13,9 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="391dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="25dp"
             android:background="@drawable/search_view"
             android:outlineAmbientShadowColor="@color/white"
             android:outlineSpotShadowColor="@color/white"

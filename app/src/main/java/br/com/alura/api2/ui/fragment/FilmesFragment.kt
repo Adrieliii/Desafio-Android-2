@@ -49,7 +49,6 @@ class FilmesFragment : Fragment() {
             AdapterFilmes(mutableListOf()) { filme -> mostraDetalhesFilmes(filme) }
         filmesPopulares.adapter = filmesPopularesAdapter
 
-        getFilmesPopulares()
 
             return view
     }
@@ -63,19 +62,7 @@ class FilmesFragment : Fragment() {
 
         viewModel.error.observe(viewLifecycleOwner, Observer { onError() })
     }
-   fun getFilmesPopulares() {
-       RetroFitInicializador.getFilmesPopulares(
-           filmesPopularesPage,
-           onSuccess = ::FilmesPopulares,
-           onError = ::onError
-       )
-   }
 
-
-    private fun FilmesPopulares(filmes: List<Filme>) {
-        filmesPopularesAdapter.chamaFilmes(filmes)
-        anexaFilmesPopulares()
-    }
 
     private fun onError() {
         Toast.makeText(activity, getString(R.string.filmes_erro), Toast.LENGTH_SHORT).show()
@@ -91,8 +78,7 @@ class FilmesFragment : Fragment() {
                 if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
                     filmesPopulares.removeOnScrollListener(this)
                     filmesPopularesPage++
-                   /* viewModel.getFilmesPopulares(filmesPopularesPage)*/
-                    getFilmesPopulares()
+                    viewModel.getFilmesPopulares(filmesPopularesPage)
                 }
             }
         })
